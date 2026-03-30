@@ -1,0 +1,68 @@
+:root {
+  --blue: #0f3d91;
+  --bg: #f2f4f7;
+  --text: #1f2937;
+  --border: #d1d5db;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, sans-serif; color: var(--text); background: var(--bg); }
+.hidden { display: none !important; }
+.page { min-height: 100vh; }
+.login-page { display: grid; place-items: center; padding: 1rem; background: radial-gradient(circle at top left, #e3ecff 0%, #f2f4f7 45%); }
+.login-card { width: min(460px, 96vw); background: white; border: 1px solid #e4e7ec; border-radius: 16px; padding: 1.4rem; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1); }
+.brand-mini { display: flex; align-items: center; gap: .9rem; margin-bottom: .7rem; }
+.logo { object-fit: contain; display: block; }
+.logo-main { width: 70px; height: 70px; }
+.logo-mini { width: 52px; height: 52px; }
+.brand-title { font-weight: 800; margin: 0; }
+.brand-subtitle { color: #667085; margin: .2rem 0 0; }
+h1 { margin: .5rem 0 .2rem; color: var(--blue); }
+.login-help { margin: 0 0 1rem; color: #667085; }
+#login-form { display: grid; gap: .75rem; }
+label { font-size: .75rem; font-weight: 700; color: #344054; display: grid; gap: .35rem; }
+input, select, textarea { font: inherit; border: 1px solid var(--border); border-radius: 6px; padding: .55rem .65rem; color: #475467; background: #fff; }
+#login-form button, .logout-btn, .primary { border: none; background: var(--blue); color: white; padding: .65rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.auth-message { color: #b42318; min-height: 1rem; margin: 0; }
+
+.topbar { display: grid; grid-template-columns: 1fr auto auto auto; gap: 1rem; align-items: center; background: linear-gradient(90deg, #2e3f5f, #66748b); color: white; padding: 1rem 1.25rem; }
+.brand { display: flex; align-items: center; gap: 1rem; }
+.brand h2 { margin: 0; font-size: 1.35rem; }
+.brand p { margin: .2rem 0 0; color: #cfe0ff; }
+.token-box { background: #f7c600; color: #2b2b2b; border-radius: 8px; padding: .6rem 1rem; min-width: 220px; }
+.ticket-box { text-align: right; }
+.token-box span, .ticket-box span, .ticket-box small { display: block; font-size: .75rem; }
+.token-box strong, .ticket-box strong { font-size: 1.65rem; }
+
+.app-layout { display: grid; grid-template-columns: 230px 1fr; gap: 1rem; padding: 1rem; }
+.side-menu { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: .8rem; height: fit-content; display: grid; gap: .5rem; }
+.menu-btn { border: 1px solid #dbe3f6; background: #f5f8ff; color: #123779; border-radius: 8px; padding: .75rem; text-align: left; font-weight: 600; cursor: pointer; }
+.menu-btn.active { background: #0f3d91; color: white; }
+
+.content { padding-right: .5rem; }
+.module { display: none; }
+.module.active { display: block; }
+.module-help { color: #667085; margin-top: -.2rem; }
+.grid { display: grid; gap: 1rem; }
+.two-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.escalamiento-layout { grid-template-columns: 340px 1fr; }
+.card { background: white; border-radius: 10px; padding: 1rem; border: 1px solid #e5e7eb; box-shadow: 0 1px 8px rgba(15,23,42,.08); }
+.card h4 { margin-top: 0; color: var(--blue); }
+.fields { display: grid; gap: .7rem; }
+.narrow { max-width: 720px; }
+.list { margin-top: .9rem; display: grid; gap: .6rem; max-height: 520px; overflow: auto; }
+.list-item { border: 1px solid #dbe3f6; background: #f8faff; border-radius: 8px; padding: .65rem; text-align: left; display: grid; cursor: pointer; }
+.list-item strong { color: #0f3d91; }
+.ok-msg { color: #067647; min-height: 1rem; margin: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin-bottom: .8rem; }
+.stat { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: .8rem; }
+.stat span { display: block; color: #667085; font-size: .82rem; }
+.stat strong { font-size: 1.6rem; color: #0f3d91; }
+canvas { width: 100%; max-width: 100%; border: 1px dashed #cbd5e1; border-radius: 8px; margin-top: .8rem; }
+
+@media (max-width: 1020px) {
+  .topbar { grid-template-columns: 1fr; }
+  .ticket-box { text-align: left; }
+  .app-layout { grid-template-columns: 1fr; }
+  .two-cols, .escalamiento-layout, .stats { grid-template-columns: 1fr; }
+}
