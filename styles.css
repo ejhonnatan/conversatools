@@ -21,7 +21,9 @@ h1 { margin: .5rem 0 .2rem; color: var(--blue); }
 #login-form { display: grid; gap: .75rem; }
 label { font-size: .75rem; font-weight: 700; color: #344054; display: grid; gap: .35rem; }
 input, select, textarea { font: inherit; border: 1px solid var(--border); border-radius: 6px; padding: .55rem .65rem; color: #475467; background: #fff; }
-#login-form button, .logout-btn, .primary { border: none; background: var(--blue); color: white; padding: .65rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+#login-form button, .logout-btn, .primary, .secondary { border: none; background: var(--blue); color: white; padding: .65rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.secondary { background: #475467; }
+.actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
 .auth-message { color: #b42318; min-height: 1rem; margin: 0; }
 
 .topbar { display: grid; grid-template-columns: 1fr auto auto auto; gap: 1rem; align-items: center; background: linear-gradient(90deg, #2e3f5f, #66748b); color: white; padding: 1rem 1.25rem; }

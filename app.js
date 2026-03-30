@@ -168,24 +168,36 @@ logoutBtn.addEventListener("click", async () => signOut(auth));
 document.querySelector("#search-ticket").addEventListener("input", renderEscalamientos);
 document.querySelector("#dash-filter").addEventListener("change", renderDashboard);
 
+const buildFormularioItem = (overrides = {}) => ({
+  ticket: String(randomTicket()),
+  escalador: document.querySelector("#fi-escalador").value || "Sin nombre",
+  noCliente: document.querySelector("#fi-no-cliente").value || "N/A",
+  cliente: document.querySelector("#fi-cliente").value || "Sin cliente",
+  motivo: document.querySelector("#fi-motivo").value || "Sin motivo",
+  status: document.querySelector("#fi-status").value,
+  escaladoA: document.querySelector("#fi-escalado-a").value || state.user.email,
+  createdAt: new Date().toISOString().slice(0, 10),
+  cierreAcciones: "",
+  ...overrides,
+});
+
 document.querySelector("#btn-escalar").addEventListener("click", () => {
-  const item = {
-    ticket: String(randomTicket()),
-    escalador: document.querySelector("#fi-escalador").value || "Sin nombre",
-    noCliente: document.querySelector("#fi-no-cliente").value || "N/A",
-    cliente: document.querySelector("#fi-cliente").value || "Sin cliente",
-    motivo: document.querySelector("#fi-motivo").value || "Sin motivo",
-    status: document.querySelector("#fi-status").value,
-    escaladoA: document.querySelector("#fi-escalado-a").value || state.user.email,
-    createdAt: new Date().toISOString().slice(0, 10),
-    cierreAcciones: "",
-  };
+  const item = buildFormularioItem({ status: "Nuevo" });
   state.escalamientos.unshift(item);
+  document.querySelector("#fi-msg").textContent = `Ticket #${item.ticket} escalado correctamente.`;
   showSection("escalamientos");
   state.selectedTicket = item.ticket;
   renderEscalamientos();
 });
 
+
+
+document.querySelector("#btn-cerrar").addEventListener("click", () => {
+  const item = buildFormularioItem({ status: "Cerrado", escaladoA: "" });
+  state.escalamientos.unshift(item);
+  document.querySelector("#fi-msg").textContent = `Ticket #${item.ticket} cerrado sin escalamiento.`;
+  renderDashboard();
+});
 document.querySelector("#btn-guardar-ctl").addEventListener("click", () => {
   const ticketId = document.querySelector("#ctl-ticket").value;
   const row = state.escalamientos.find((x) => x.ticket === ticketId);

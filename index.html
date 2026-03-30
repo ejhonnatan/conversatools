@@ -80,14 +80,18 @@
                   <label>MOTIVO<input id="fi-motivo" placeholder="Ej: Trato y amabilidad" /></label>
                   <label>COMENTARIO<textarea id="fi-comentario" rows="3" placeholder="Detalle del caso..."></textarea></label>
                 </div>
-                <button id="btn-escalar" class="primary">Generar escalamiento</button>
+                <div class="actions-row">
+                  <button id="btn-escalar" class="primary">Escalar</button>
+                  <button id="btn-cerrar" class="secondary">Cerrar sin escalamiento</button>
+                </div>
+                <p id="fi-msg" class="ok-msg"></p>
               </article>
 
               <article class="card">
                 <h4>Estado y Seguimiento</h4>
                 <div class="fields">
                   <label>ESCALADO A<input id="fi-escalado-a" placeholder="correo@empresa.com" /></label>
-                  <label>STATUS<select id="fi-status"><option>Nuevo</option><option>En proceso</option></select></label>
+                  <label>STATUS<select id="fi-status"><option>Nuevo</option><option>En proceso</option><option>Cerrado</option></select></label>
                   <label>STATUS LLAMADA<select id="fi-llamada"><option>No contestada</option><option>Contestada</option></select></label>
                   <label>INTENTOS<select id="fi-intentos"><option>1</option><option>2</option><option>3</option></select></label>
                   <label>ACCIONES<textarea id="fi-acciones" rows="4" placeholder="Acciones realizadas"></textarea></label>
