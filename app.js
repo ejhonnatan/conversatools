@@ -28,9 +28,10 @@ const logoutBtn = document.querySelector("#logout-btn");
 
 
 const logoCandidates = [
+  "assets/logo-fallback.svg",
   "https://raw.githubusercontent.com/conversatools/logoconversa.png/main/logoconversa.png",
-  "https://github.com/conversatools/logoconversa.png/raw/main/logoconversa.png",
-  "https://github.com/conversatools/logoconversa.png/blob/main/logoconversa.png?raw=1",
+  "https://raw.githubusercontent.com/conversatools/logoconversa.png/main/logoconversa.jpg",
+  "https://raw.githubusercontent.com/conversatools/logoconversa.png/main/logoconversa.jpeg",
 ];
 
 document.querySelectorAll("img[data-logo]").forEach((img) => {
