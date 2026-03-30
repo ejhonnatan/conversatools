@@ -17,7 +17,7 @@
           <img class="logo logo-mini" src="assets/logo-fallback.svg" alt="Logo Conversa Tools" data-logo />
           <div>
             <p class="brand-title">Conversa Tools</p>
-            <p class="brand-subtitle">Ingreso seguro con Firebase</p>
+
           </div>
         </div>
 
@@ -43,8 +43,8 @@
           </div>
         </div>
         <div class="token-box">
-          <span>TOKEN</span>
-          <strong>Ingrese TOKEN</strong>
+          <label for="global-token">TOKEN</label>
+          <input id="global-token" type="text" placeholder="Ingrese TOKEN" />
         </div>
         <div class="ticket-box">
           <span>TICKET</span>
@@ -107,6 +107,9 @@
               <article class="card">
                 <h4>Detalle de escalamiento</h4>
                 <div id="escalamiento-detalle" class="fields"></div>
+                <label>ACCIONES REALIZADAS PARA CIERRE<textarea id="esc-cierre" rows="4" placeholder="Describe lo realizado para cerrar el escalamiento"></textarea></label>
+                <button id="btn-guardar-cierre" class="primary">Guardar acciones de cierre</button>
+                <p id="esc-msg" class="ok-msg"></p>
               </article>
             </div>
           </section>

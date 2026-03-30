@@ -42,9 +42,9 @@ ticket.textContent = randomTicket();
 const seedCases = (email) => {
   const now = new Date().toISOString().slice(0, 10);
   return [
-    { ticket: "24611735", escalador: "Ana Ruiz", cliente: "Walmart", noCliente: "124575", motivo: "Mala atención", status: "Nuevo", escaladoA: email, createdAt: now },
-    { ticket: "24611748", escalador: "Mario León", cliente: "Chedraui", noCliente: "733299", motivo: "Demora en respuesta", status: "En proceso", escaladoA: email, createdAt: now },
-    { ticket: "24611802", escalador: "Paola Díaz", cliente: "Soriana", noCliente: "990031", motivo: "Seguimiento incompleto", status: "Nuevo", escaladoA: email, createdAt: now },
+    { ticket: "24611735", escalador: "Ana Ruiz", cliente: "Walmart", noCliente: "124575", motivo: "Mala atención", status: "Nuevo", escaladoA: email, createdAt: now, cierreAcciones: "" },
+    { ticket: "24611748", escalador: "Mario León", cliente: "Chedraui", noCliente: "733299", motivo: "Demora en respuesta", status: "En proceso", escaladoA: email, createdAt: now, cierreAcciones: "" },
+    { ticket: "24611802", escalador: "Paola Díaz", cliente: "Soriana", noCliente: "990031", motivo: "Seguimiento incompleto", status: "Nuevo", escaladoA: email, createdAt: now, cierreAcciones: "" },
   ];
 };
 
@@ -102,6 +102,11 @@ const renderDetalle = () => {
     c.status = e.target.value;
     renderEscalamientos();
   });
+
+  const cierre = document.querySelector("#esc-cierre");
+  const msg = document.querySelector("#esc-msg");
+  cierre.value = c.cierreAcciones ?? "";
+  msg.textContent = "";
 };
 
 const renderCtlTickets = () => {
@@ -173,6 +178,7 @@ document.querySelector("#btn-escalar").addEventListener("click", () => {
     status: document.querySelector("#fi-status").value,
     escaladoA: document.querySelector("#fi-escalado-a").value || state.user.email,
     createdAt: new Date().toISOString().slice(0, 10),
+    cierreAcciones: "",
   };
   state.escalamientos.unshift(item);
   showSection("escalamientos");
@@ -195,4 +201,19 @@ document.querySelector("#btn-guardar-ctl").addEventListener("click", () => {
   document.querySelector("#ctl-msg").textContent = "Cierre CTL guardado correctamente.";
   renderEscalamientos();
   renderDashboard();
+});
+
+
+document.querySelector("#global-token").addEventListener("input", (e) => {
+  const token = e.target.value.trim();
+  document.querySelector("#search-ticket").value = token;
+  showSection("escalamientos");
+  renderEscalamientos();
+});
+
+document.querySelector("#btn-guardar-cierre").addEventListener("click", () => {
+  const c = state.escalamientos.find((x) => x.ticket === state.selectedTicket);
+  if (!c) return;
+  c.cierreAcciones = document.querySelector("#esc-cierre").value;
+  document.querySelector("#esc-msg").textContent = "Acciones de cierre guardadas.";
 });
