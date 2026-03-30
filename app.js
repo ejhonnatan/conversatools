@@ -34,6 +34,8 @@ const state = {
   escalamientos: [],
   ctl: [],
   selectedTicket: null,
+  editEscalamiento: false,
+  editCtl: false,
 };
 
 const randomTicket = () => Math.floor(10000000 + Math.random() * 89999999);
@@ -75,6 +77,7 @@ const renderEscalamientos = () => {
 
   list.querySelectorAll(".list-item").forEach((btn) => btn.addEventListener("click", () => {
     state.selectedTicket = btn.dataset.ticket;
+    state.editEscalamiento = false;
     renderDetalle();
   }));
 
@@ -90,23 +93,21 @@ const renderDetalle = () => {
     panel.innerHTML = "<p>Selecciona un ticket.</p>";
     return;
   }
+
+  const disabled = state.editEscalamiento ? "" : "disabled";
   panel.innerHTML = `
     <label># TICKET<input value="${c.ticket}" disabled /></label>
-    <label>QUIEN ESCALÓ<input value="${c.escalador}" disabled /></label>
-    <label>CLIENTE<input value="${c.cliente}" disabled /></label>
-    <label>NO CLIENTE<input value="${c.noCliente}" disabled /></label>
-    <label>MOTIVO<input value="${c.motivo}" disabled /></label>
-    <label>STATUS<select id="detalle-status"><option ${c.status === "Nuevo" ? "selected" : ""}>Nuevo</option><option ${c.status === "En proceso" ? "selected" : ""}>En proceso</option></select></label>
+    <label>QUIEN ESCALÓ<input id="det-escalador" value="${c.escalador}" ${disabled} /></label>
+    <label>CLIENTE<input id="det-cliente" value="${c.cliente}" ${disabled} /></label>
+    <label>NO CLIENTE<input id="det-nocliente" value="${c.noCliente}" ${disabled} /></label>
+    <label>MOTIVO<input id="det-motivo" value="${c.motivo}" ${disabled} /></label>
+    <label>STATUS<select id="detalle-status" ${disabled}><option ${c.status === "Nuevo" ? "selected" : ""}>Nuevo</option><option ${c.status === "En proceso" ? "selected" : ""}>En proceso</option><option ${c.status === "Cerrado" ? "selected" : ""}>Cerrado</option><option ${c.status === "Cerrado CTL" ? "selected" : ""}>Cerrado CTL</option></select></label>
   `;
-  panel.querySelector("#detalle-status").addEventListener("change", (e) => {
-    c.status = e.target.value;
-    renderEscalamientos();
-  });
 
   const cierre = document.querySelector("#esc-cierre");
   const msg = document.querySelector("#esc-msg");
   cierre.value = c.cierreAcciones ?? "";
-  msg.textContent = "";
+  msg.textContent = state.editEscalamiento ? "Modo edición activado." : "";
 };
 
 const renderCtlTickets = () => {
@@ -202,19 +203,62 @@ document.querySelector("#btn-guardar-ctl").addEventListener("click", () => {
   const ticketId = document.querySelector("#ctl-ticket").value;
   const row = state.escalamientos.find((x) => x.ticket === ticketId);
   if (row) row.status = "Cerrado CTL";
-  state.ctl.push({
+  const payload = {
     ticket: ticketId,
     tipo: document.querySelector("#ctl-tipo").value,
     causa: document.querySelector("#ctl-causa").value,
     accion: document.querySelector("#ctl-accion").value,
     resultado: document.querySelector("#ctl-resultado").value,
     fecha: document.querySelector("#ctl-fecha").value,
-  });
+  };
+  const ix = state.ctl.findIndex((x) => x.ticket === ticketId);
+  if (ix >= 0) state.ctl[ix] = payload;
+  else state.ctl.push(payload);
   document.querySelector("#ctl-msg").textContent = "Cierre CTL guardado correctamente.";
   renderEscalamientos();
   renderDashboard();
 });
 
+
+
+
+document.querySelector("#btn-editar-esc").addEventListener("click", () => {
+  if (!state.selectedTicket) return;
+  state.editEscalamiento = true;
+  renderDetalle();
+});
+
+document.querySelector("#btn-guardar-esc").addEventListener("click", () => {
+  const c = state.escalamientos.find((x) => x.ticket === state.selectedTicket);
+  if (!c) return;
+  if (state.editEscalamiento) {
+    c.escalador = document.querySelector("#det-escalador").value;
+    c.cliente = document.querySelector("#det-cliente").value;
+    c.noCliente = document.querySelector("#det-nocliente").value;
+    c.motivo = document.querySelector("#det-motivo").value;
+    c.status = document.querySelector("#detalle-status").value;
+    state.editEscalamiento = false;
+  }
+  c.cierreAcciones = document.querySelector("#esc-cierre").value;
+  document.querySelector("#esc-msg").textContent = "Cambios del escalamiento guardados.";
+  renderEscalamientos();
+  renderDashboard();
+});
+
+document.querySelector("#btn-editar-ctl").addEventListener("click", () => {
+  const ticketId = document.querySelector("#ctl-ticket").value;
+  const found = state.ctl.find((x) => x.ticket === ticketId);
+  if (!found) {
+    document.querySelector("#ctl-msg").textContent = "No existe CTL previo para este ticket; captura y guarda.";
+    return;
+  }
+  document.querySelector("#ctl-tipo").value = found.tipo;
+  document.querySelector("#ctl-causa").value = found.causa;
+  document.querySelector("#ctl-accion").value = found.accion;
+  document.querySelector("#ctl-resultado").value = found.resultado;
+  document.querySelector("#ctl-fecha").value = found.fecha;
+  document.querySelector("#ctl-msg").textContent = "CTL cargado para edición.";
+});
 
 document.querySelector("#global-token").addEventListener("input", (e) => {
   const token = e.target.value.trim();

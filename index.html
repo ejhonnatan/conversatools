@@ -111,6 +111,10 @@
               <article class="card">
                 <h4>Detalle de escalamiento</h4>
                 <div id="escalamiento-detalle" class="fields"></div>
+                <div class="actions-row">
+                  <button id="btn-editar-esc" class="secondary">Editar datos</button>
+                  <button id="btn-guardar-esc" class="primary">Guardar edición</button>
+                </div>
                 <label>ACCIONES REALIZADAS PARA CIERRE<textarea id="esc-cierre" rows="4" placeholder="Describe lo realizado para cerrar el escalamiento"></textarea></label>
                 <button id="btn-guardar-cierre" class="primary">Guardar acciones de cierre</button>
                 <p id="esc-msg" class="ok-msg"></p>
@@ -129,7 +133,10 @@
                 <label>ACCION CORRECTIVA<textarea id="ctl-accion" rows="3" placeholder="¿Qué se corrigió?"></textarea></label>
                 <label>RESULTADO CON CLIENTE<textarea id="ctl-resultado" rows="3" placeholder="¿Se recuperó la relación?"></textarea></label>
                 <label>FECHA CIERRE<input id="ctl-fecha" type="date" /></label>
-                <button id="btn-guardar-ctl" class="primary">Guardar cierre CTL</button>
+                <div class="actions-row">
+                  <button id="btn-editar-ctl" class="secondary">Editar datos CTL</button>
+                  <button id="btn-guardar-ctl" class="primary">Guardar cierre CTL</button>
+                </div>
                 <p id="ctl-msg" class="ok-msg"></p>
               </div>
             </article>
