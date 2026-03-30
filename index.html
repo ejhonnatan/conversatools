@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversa Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="login-overlay" class="overlay">
+      <div class="login-card">
+        <div class="brand-mini">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <p class="brand-title">Conversa Tools</p>
+            <p class="brand-subtitle">Ingreso con Firebase</p>
+          </div>
+        </div>
+        <form id="login-form">
+          <label>
+            Correo
+            <input type="email" id="email" required placeholder="tu@empresa.com" />
+          </label>
+          <label>
+            Contraseña
+            <input type="password" id="password" required placeholder="********" />
+          </label>
+          <button type="submit">Entrar</button>
+          <p id="auth-message" class="auth-message"></p>
+        </form>
+      </div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <h1>CONVERSA TOOLS</h1>
+          <p>Ticket de servicio · Módulo Formulario</p>
+        </div>
+      </div>
+      <div class="token-box">
+        <span>TOKEN</span>
+        <strong>Ingrese TOKEN</strong>
+      </div>
+      <div class="ticket-box">
+        <span>TICKET</span>
+        <strong id="ticket-id">24611735</strong>
+        <small>(autogenerado)</small>
+      </div>
+    </header>
+
+    <main>
+      <nav class="module-nav">
+        <button class="active">Formulario</button>
+      </nav>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Información del Cliente</h2>
+          <div class="fields">
+            <label>UNIDAD DE NEGOCIO<input placeholder="CAMPO LIBRE" /></label>
+            <label>NO CLIENTE<input placeholder="Ej: 124575" /></label>
+            <label>CLIENTE<input placeholder="Ej: Walmart (CAMPO LIBRE)" /></label>
+            <label>CONTACTO<input placeholder="Ej: Luis Mendoza" /></label>
+            <label>E-MAIL<input placeholder="LMENDOZA@..." /></label>
+            <label>TELÉFONO<input placeholder="442-2345-1234 (CAMPO LIBRE)" /></label>
+            <label>NPS<input placeholder="Ej: 6" /></label>
+            <label>FECHA ENCUESTA<input type="date" value="2026-03-18" /></label>
+            <label>MOTIVO<input placeholder="Ej: Trato y amabilidad" /></label>
+            <label>COMENTARIO<textarea rows="3" placeholder="Ej: muy mal servicio..."></textarea></label>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Estado y Seguimiento</h2>
+          <div class="fields">
+            <label>ESCALADO A
+              <select><option>Seleccione opción</option></select>
+            </label>
+            <label>STATUS
+              <select><option>Nuevo</option></select>
+            </label>
+            <label>STATUS LLAMADA
+              <select><option>No contestada</option></select>
+            </label>
+            <label>INTENTOS
+              <select><option>1 AL 10</option></select>
+            </label>
+            <label>ACCIONES<textarea rows="3" placeholder="Ingrese acciones realizadas"></textarea></label>
+            <label>SENTIMIENTO DESPUÉS DE CTL
+              <select><option>Seleccione</option></select>
+            </label>
+            <label>MOTIVOS DEL TICKET
+              <select><option>Seleccione</option></select>
+            </label>
+            <label>FECHA DE CIERRE (SÓLO SI ESTÁ CERRADO)
+              <input type="date" />
+            </label>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="firebase-config.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
