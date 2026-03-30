@@ -99,3 +99,11 @@ canvas { width: 100%; max-width: 100%; border: 1px dashed #cbd5e1; border-radius
   box-shadow: 0 8px 24px rgba(0,0,0,.2);
   z-index: 50;
 }
+
+.locked-view input,
+.locked-view select,
+.locked-view textarea {
+  background: #f5f6f8;
+  color: #98a2b3;
+  border-color: #e4e7ec;
+}

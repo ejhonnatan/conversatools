@@ -78,6 +78,17 @@ const showLogin = () => {
   appView.setAttribute("aria-hidden", "true");
 };
 
+
+const setCtlEditMode = (editing) => {
+  state.editCtl = editing;
+  const container = document.querySelector("#ctl-fields");
+  container.classList.toggle("locked-view", !editing);
+  container.querySelectorAll("select, textarea, input").forEach((el) => {
+    if (el.id === "ctl-ticket") return;
+    el.disabled = !editing;
+  });
+};
+
 const renderEscalamientos = () => {
   const list = document.querySelector("#escalamientos-list");
   const q = document.querySelector("#search-ticket").value.trim();
@@ -117,6 +128,8 @@ const renderDetalle = () => {
   const cierre = document.querySelector("#esc-cierre");
   const msg = document.querySelector("#esc-msg");
   cierre.value = c.cierreAcciones ?? "";
+  cierre.disabled = !state.editEscalamiento;
+  document.querySelector("#section-escalamientos .card:last-child").classList.toggle("locked-view", !state.editEscalamiento);
   msg.textContent = state.editEscalamiento ? "Modo edición activado." : "";
 };
 
@@ -156,6 +169,7 @@ onAuthStateChanged(auth, (user) => {
     showApp();
     renderEscalamientos();
     renderDashboard();
+    setCtlEditMode(false);
     return;
   }
   showLogin();
@@ -225,6 +239,7 @@ document.querySelector("#btn-guardar-ctl").addEventListener("click", () => {
   if (ix >= 0) state.ctl[ix] = payload;
   else state.ctl.push(payload);
   document.querySelector("#ctl-msg").textContent = "Cierre CTL guardado correctamente.";
+  setCtlEditMode(false);
   showSaveToast("CTL guardado correctamente.");
   renderEscalamientos();
   renderDashboard();
@@ -260,6 +275,7 @@ document.querySelector("#btn-guardar-esc").addEventListener("click", () => {
 document.querySelector("#btn-editar-ctl").addEventListener("click", () => {
   const ticketId = document.querySelector("#ctl-ticket").value;
   const found = state.ctl.find((x) => x.ticket === ticketId);
+  setCtlEditMode(true);
   if (!found) {
     document.querySelector("#ctl-msg").textContent = "No existe CTL previo para este ticket; captura y guarda.";
     return;
@@ -277,12 +293,4 @@ document.querySelector("#global-token").addEventListener("input", (e) => {
   document.querySelector("#search-ticket").value = token;
   showSection("escalamientos");
   renderEscalamientos();
-});
-
-document.querySelector("#btn-guardar-cierre").addEventListener("click", () => {
-  const c = state.escalamientos.find((x) => x.ticket === state.selectedTicket);
-  if (!c) return;
-  c.cierreAcciones = document.querySelector("#esc-cierre").value;
-  document.querySelector("#esc-msg").textContent = "Acciones de cierre guardadas.";
-  showSaveToast("Acciones guardadas correctamente.");
 });

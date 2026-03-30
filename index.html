@@ -111,12 +111,11 @@
               <article class="card">
                 <h4>Detalle de escalamiento</h4>
                 <div id="escalamiento-detalle" class="fields"></div>
+                <label>ACCIONES REALIZADAS PARA CIERRE<textarea id="esc-cierre" rows="4" placeholder="Describe lo realizado para cerrar el escalamiento"></textarea></label>
                 <div class="actions-row">
                   <button id="btn-editar-esc" class="secondary">Editar datos</button>
-                  <button id="btn-guardar-esc" class="primary">Guardar edición</button>
+                  <button id="btn-guardar-esc" class="primary">Guardar</button>
                 </div>
-                <label>ACCIONES REALIZADAS PARA CIERRE<textarea id="esc-cierre" rows="4" placeholder="Describe lo realizado para cerrar el escalamiento"></textarea></label>
-                <button id="btn-guardar-cierre" class="primary">Guardar acciones de cierre</button>
                 <p id="esc-msg" class="ok-msg"></p>
               </article>
             </div>
@@ -126,7 +125,7 @@
             <h3>CTL · Cierre de ciclo (NPS)</h3>
             <p class="module-help">Registro de cierre de ciclo según metodología NPS.</p>
             <article class="card narrow">
-              <div class="fields">
+              <div id="ctl-fields" class="fields">
                 <label># TICKET<select id="ctl-ticket"></select></label>
                 <label>TIPO NPS<select id="ctl-tipo"><option>Detractor (0-6)</option><option>Pasivo (7-8)</option><option>Promotor (9-10)</option></select></label>
                 <label>CAUSA RAÍZ<textarea id="ctl-causa" rows="3" placeholder="¿Qué originó la mala experiencia?"></textarea></label>
@@ -135,7 +134,7 @@
                 <label>FECHA CIERRE<input id="ctl-fecha" type="date" /></label>
                 <div class="actions-row">
                   <button id="btn-editar-ctl" class="secondary">Editar datos CTL</button>
-                  <button id="btn-guardar-ctl" class="primary">Guardar cierre CTL</button>
+                  <button id="btn-guardar-ctl" class="primary">Guardar</button>
                 </div>
                 <p id="ctl-msg" class="ok-msg"></p>
               </div>
