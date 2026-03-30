@@ -1,34 +1,31 @@
-# Conversa Tools
+# Conversa Tools MVP
 
-Plantilla web inspirada en Paex360 para gestión de tickets y módulo **Formulario**, con autenticación obligatoria por Firebase y lista para desplegar en Netlify.
+Plantilla web estática con login Firebase y 4 módulos operativos:
 
-## Incluye
+1. **Formulario Inicia**
+2. **Escalamientos**
+3. **CTL** (Cierre de ciclo NPS)
+4. **Dashboard**
 
-- Branding cambiado a **Conversa Tools**.
-- Módulo de **Encuesta** reemplazado por **Formulario**.
-- Vista de login separada: el formulario no se muestra hasta autenticar correctamente en Firebase.
-- Validación de acceso usando `onAuthStateChanged` de Firebase Auth.
-- Configuración de Netlify para deploy estático.
+## Flujo MVP
 
-## Firebase integrado
+- El usuario inicia sesión por Firebase Auth.
+- Levanta caso en **Formulario Inicia** y puede generar escalamiento.
+- El escalamiento aparece en **Escalamientos**, con buscador por `#Ticket` y detalle editable.
+- En **CTL** se documenta cierre de ciclo NPS y se marca el ticket como `Cerrado CTL`.
+- **Dashboard** muestra KPIs y gráfica interactiva por estado.
 
-El proyecto ya está configurado con este Firebase:
+## Casos de demo incluidos
 
-- `projectId`: `conversatools`
-- `authDomain`: `conversatools.firebaseapp.com`
-- `storageBucket`: `conversatools.firebasestorage.app`
-
-> Importante: para poder entrar, el usuario debe existir en Firebase Authentication (Email/Password).
+Al iniciar sesión se crean 3 escalamientos de ejemplo asignados al usuario logueado para mostrar el MVP.
 
 ## Ejecutar local
-
-Como sitio estático puedes abrir con un servidor simple:
 
 ```bash
 python -m http.server 8080
 ```
 
-Luego abre `http://localhost:8080`.
+Abrir `http://localhost:8080`.
 
 ## Despliegue en Netlify
 
