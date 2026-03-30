@@ -41,6 +41,16 @@ const state = {
 const randomTicket = () => Math.floor(10000000 + Math.random() * 89999999);
 ticket.textContent = randomTicket();
 
+
+const toast = document.querySelector("#save-toast");
+let toastTimer;
+const showSaveToast = (text = "Guardado correctamente.") => {
+  toast.textContent = text;
+  toast.classList.remove("hidden");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.add("hidden"), 2200);
+};
+
 const seedCases = (email) => {
   const now = new Date().toISOString().slice(0, 10);
   return [
@@ -215,6 +225,7 @@ document.querySelector("#btn-guardar-ctl").addEventListener("click", () => {
   if (ix >= 0) state.ctl[ix] = payload;
   else state.ctl.push(payload);
   document.querySelector("#ctl-msg").textContent = "Cierre CTL guardado correctamente.";
+  showSaveToast("CTL guardado correctamente.");
   renderEscalamientos();
   renderDashboard();
 });
@@ -241,6 +252,7 @@ document.querySelector("#btn-guardar-esc").addEventListener("click", () => {
   }
   c.cierreAcciones = document.querySelector("#esc-cierre").value;
   document.querySelector("#esc-msg").textContent = "Cambios del escalamiento guardados.";
+  showSaveToast("Edición guardada correctamente.");
   renderEscalamientos();
   renderDashboard();
 });
@@ -272,4 +284,5 @@ document.querySelector("#btn-guardar-cierre").addEventListener("click", () => {
   if (!c) return;
   c.cierreAcciones = document.querySelector("#esc-cierre").value;
   document.querySelector("#esc-msg").textContent = "Acciones de cierre guardadas.";
+  showSaveToast("Acciones guardadas correctamente.");
 });
