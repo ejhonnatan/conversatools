@@ -1,43 +1,36 @@
 # Conversa Tools
 
-Plantilla web inspirada en Paex360 para gestión de tickets y módulo **Formulario**, con login de Firebase y lista para desplegar en Netlify.
+Plantilla web inspirada en Paex360 para gestión de tickets y módulo **Formulario**, con autenticación obligatoria por Firebase y lista para desplegar en Netlify.
 
 ## Incluye
 
 - Branding cambiado a **Conversa Tools**.
-- Estructura del formulario solicitada (Información del Cliente + Estado y Seguimiento).
 - Módulo de **Encuesta** reemplazado por **Formulario**.
-- Login inicial con Firebase Authentication (email/contraseña).
-- Configuración simple para Netlify.
+- Vista de login separada: el formulario no se muestra hasta autenticar correctamente en Firebase.
+- Validación de acceso usando `onAuthStateChanged` de Firebase Auth.
+- Configuración de Netlify para deploy estático.
 
-## Configurar Firebase (pendiente de tus datos)
+## Firebase integrado
 
-1. Crea un archivo `firebase-config.js` en la raíz con este contenido:
+El proyecto ya está configurado con este Firebase:
 
-```js
-window.CONVERSA_FIREBASE_CONFIG = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MESSAGING_SENDER_ID",
-  appId: "TU_APP_ID",
-};
+- `projectId`: `conversatools`
+- `authDomain`: `conversatools.firebaseapp.com`
+- `storageBucket`: `conversatools.firebasestorage.app`
+
+> Importante: para poder entrar, el usuario debe existir en Firebase Authentication (Email/Password).
+
+## Ejecutar local
+
+Como sitio estático puedes abrir con un servidor simple:
+
+```bash
+python -m http.server 8080
 ```
 
-2. En `index.html`, antes de `app.js`, agrega:
-
-```html
-<script src="firebase-config.js"></script>
-```
-
-3. Habilita en Firebase Authentication el proveedor de Email/Password.
+Luego abre `http://localhost:8080`.
 
 ## Despliegue en Netlify
 
-Este proyecto es estático. Puedes desplegarlo directamente conectando el repo o usando Netlify Drop.
-
 - Publish directory: `.`
 - Build command: *(vacío)*
-
-Si prefieres, después te pido los datos de Firebase y te lo dejo preparado con variables de entorno para un flujo más cerrado.

@@ -3,7 +3,6 @@
   --green: #4ea44f;
   --bg: #f2f4f7;
   --text: #1f2937;
-  --muted: #6b7280;
   --border: #d1d5db;
 }
 
@@ -15,19 +14,32 @@ body {
   background: var(--bg);
 }
 
-.topbar {
+.hidden { display: none !important; }
+
+.page { min-height: 100vh; }
+
+.login-page {
   display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 1rem;
-  align-items: center;
-  background: linear-gradient(90deg, #2e3f5f, #66748b);
-  color: white;
-  padding: 1rem 1.25rem;
+  place-items: center;
+  padding: 1rem;
+  background: radial-gradient(circle at top left, #e3ecff 0%, #f2f4f7 45%);
 }
 
-.brand { display: flex; align-items: center; gap: 1rem; }
-.brand h1 { margin: 0; font-size: 1.5rem; letter-spacing: 0.03em; }
-.brand p { margin: 0.2rem 0 0; color: #cfe0ff; }
+.login-card {
+  width: min(460px, 96vw);
+  background: white;
+  border: 1px solid #e4e7ec;
+  border-radius: 16px;
+  padding: 1.4rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.7rem;
+}
 
 .mark {
   width: 64px;
@@ -47,6 +59,56 @@ body {
   border-radius: 50%;
   opacity: 0.95;
 }
+
+.brand-mini .mark { width: 44px; height: 44px; border-radius: 14px; }
+.brand-mini .mark::before { inset: 8px; border-width: 4px; }
+.brand-title { font-weight: 800; margin: 0; }
+.brand-subtitle { color: #667085; margin: 0.2rem 0 0; }
+
+h1 { margin: 0.5rem 0 0.2rem; color: var(--blue); }
+.login-help { margin: 0 0 1rem; color: #667085; }
+
+#login-form { display: grid; gap: 0.75rem; }
+label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #344054;
+  display: grid;
+  gap: 0.35rem;
+}
+input, select, textarea {
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.65rem;
+  color: #475467;
+  background: #fff;
+}
+#login-form button,
+.logout-btn {
+  border: none;
+  background: var(--blue);
+  color: white;
+  padding: 0.65rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.auth-message { color: #b42318; min-height: 1rem; margin: 0; }
+
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 1rem;
+  align-items: center;
+  background: linear-gradient(90deg, #2e3f5f, #66748b);
+  color: white;
+  padding: 1rem 1.25rem;
+}
+
+.brand { display: flex; align-items: center; gap: 1rem; }
+.brand h2 { margin: 0; font-size: 1.45rem; letter-spacing: 0.03em; }
+.brand p { margin: 0.2rem 0 0; color: #cfe0ff; }
 
 .token-box {
   background: #f7c600;
@@ -90,63 +152,10 @@ main { max-width: 1180px; margin: 1.5rem auto; padding: 0 1rem; }
   border: 1px solid #e5e7eb;
   box-shadow: 0 1px 8px rgba(15, 23, 42, 0.08);
 }
-.card h2 { color: var(--blue); margin: 0 0 1rem; }
+.card h3 { color: var(--blue); margin: 0 0 1rem; }
 .fields { display: grid; gap: 0.75rem; }
-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #344054;
-  display: grid;
-  gap: 0.35rem;
-}
-input, select, textarea {
-  font: inherit;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.55rem 0.65rem;
-  color: #475467;
-  background: #fff;
-}
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 24, 44, 0.55);
-  display: grid;
-  place-items: center;
-  z-index: 20;
-}
-.overlay.hidden { display: none; }
-
-.login-card {
-  width: min(420px, 94vw);
-  background: white;
-  border-radius: 14px;
-  padding: 1.3rem;
-}
-.brand-mini {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin-bottom: 0.9rem;
-}
-.brand-mini .mark { width: 44px; height: 44px; border-radius: 14px; }
-.brand-mini .mark::before { inset: 8px; border-width: 4px; }
-.brand-title { font-weight: 800; margin: 0; }
-.brand-subtitle { color: #667085; margin: 0.2rem 0 0; }
-#login-form { display: grid; gap: 0.7rem; }
-#login-form button {
-  margin-top: 0.5rem;
-  border: none;
-  background: var(--blue);
-  color: white;
-  padding: 0.65rem;
-  border-radius: 8px;
-  font-weight: 700;
-}
-.auth-message { color: #b42318; min-height: 1rem; margin: 0; }
-
-@media (max-width: 960px) {
+@media (max-width: 980px) {
   .topbar { grid-template-columns: 1fr; }
   .ticket-box { text-align: left; }
   .grid { grid-template-columns: 1fr; }
