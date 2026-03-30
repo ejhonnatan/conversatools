@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversa Tools</title>
+    <link rel="icon" href="assets/logo-fallback.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section id="login-view" class="page login-page">
+      <div class="login-card">
+        <div class="brand-mini">
+          <img class="logo logo-mini" src="assets/logo-fallback.svg" alt="Logo Conversa Tools" data-logo />
+          <div>
+            <p class="brand-title">Conversa Tools</p>
+
+          </div>
+        </div>
+
+        <h1>Iniciar sesión</h1>
+        <p class="login-help">Debes autenticarte para ingresar a los módulos Formulario, Escalamientos, CTL y Dashboard.</p>
+
+        <form id="login-form">
+          <label>Correo<input type="email" id="email" required placeholder="tu@empresa.com" autocomplete="username" /></label>
+          <label>Contraseña<input type="password" id="password" required placeholder="********" autocomplete="current-password" /></label>
+          <button type="submit">Entrar</button>
+          <p id="auth-message" class="auth-message"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="app-view" class="page hidden" aria-hidden="true">
+      <header class="topbar">
+        <div class="brand">
+          <img class="logo logo-main" src="assets/logo-fallback.svg" alt="Logo principal Conversa Tools" data-logo />
+          <div>
+            <h2>CONVERSA TOOLS</h2>
+            <p>Operación NPS · Ticketing</p>
+          </div>
+        </div>
+        <div class="token-box">
+          <label for="global-token">TOKEN</label>
+          <input id="global-token" type="text" placeholder="Ingrese TOKEN" />
+        </div>
+        <div class="ticket-box">
+          <span>TICKET</span>
+          <strong id="ticket-id">24611735</strong>
+          <small>(autogenerado)</small>
+        </div>
+        <button id="logout-btn" class="logout-btn">Cerrar sesión</button>
+      </header>
+
+      <div class="app-layout">
+        <aside class="side-menu">
+          <button class="menu-btn active" data-section="formulario">Formulario Inicia</button>
+          <button class="menu-btn" data-section="escalamientos">Escalamientos</button>
+          <button class="menu-btn" data-section="ctl">CTL</button>
+          <button class="menu-btn" data-section="dashboard">Dashboard</button>
+        </aside>
+
+        <main class="content">
+          <section id="section-formulario" class="module active">
+            <h3>Formulario Inicial</h3>
+            <p class="module-help">Levanta el caso inicial y genera el escalamiento.</p>
+            <div class="grid two-cols">
+              <article class="card">
+                <h4>Información del Cliente</h4>
+                <div class="fields">
+                  <label>QUIEN ESCALA<input id="fi-escalador" placeholder="Ej: Ana Ruiz" /></label>
+                  <label>NO CLIENTE<input id="fi-no-cliente" placeholder="Ej: 124575" /></label>
+                  <label>CLIENTE<input id="fi-cliente" placeholder="Ej: Walmart" /></label>
+                  <label>CONTACTO<input id="fi-contacto" placeholder="Ej: Luis Mendoza" /></label>
+                  <label>E-MAIL<input id="fi-email" placeholder="LMENDOZA@..." /></label>
+                  <label>TELÉFONO<input id="fi-telefono" placeholder="442-2345-1234" /></label>
+                  <label>NPS<input id="fi-nps" placeholder="Ej: 6" /></label>
+                  <label>MOTIVO<input id="fi-motivo" placeholder="Ej: Trato y amabilidad" /></label>
+                  <label>COMENTARIO<textarea id="fi-comentario" rows="3" placeholder="Detalle del caso..."></textarea></label>
+                </div>
+                <div class="actions-row">
+                  <button id="btn-escalar" class="primary">Escalar</button>
+                  <button id="btn-cerrar" class="secondary">Cerrar sin escalamiento</button>
+                </div>
+                <p id="fi-msg" class="ok-msg"></p>
+              </article>
+
+              <article class="card">
+                <h4>Estado y Seguimiento</h4>
+                <div class="fields">
+                  <label>ESCALADO A<input id="fi-escalado-a" placeholder="correo@empresa.com" /></label>
+                  <label>STATUS<select id="fi-status"><option>Nuevo</option><option>En proceso</option><option>Cerrado</option></select></label>
+                  <label>STATUS LLAMADA<select id="fi-llamada"><option>No contestada</option><option>Contestada</option></select></label>
+                  <label>INTENTOS<select id="fi-intentos"><option>1</option><option>2</option><option>3</option></select></label>
+                  <label>ACCIONES<textarea id="fi-acciones" rows="4" placeholder="Acciones realizadas"></textarea></label>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="section-escalamientos" class="module">
+            <h3>Escalamientos</h3>
+            <p class="module-help">Colección de tickets escalados al usuario logueado. Busca por #Ticket.</p>
+            <div class="grid escalamiento-layout">
+              <article class="card">
+                <label>Buscar por #Ticket<input id="search-ticket" placeholder="Ej: 24611735" /></label>
+                <div id="escalamientos-list" class="list"></div>
+              </article>
+              <article class="card">
+                <h4>Detalle de escalamiento</h4>
+                <div id="escalamiento-detalle" class="fields"></div>
+                <label>ACCIONES REALIZADAS PARA CIERRE<textarea id="esc-cierre" rows="4" placeholder="Describe lo realizado para cerrar el escalamiento"></textarea></label>
+                <button id="btn-guardar-cierre" class="primary">Guardar acciones de cierre</button>
+                <p id="esc-msg" class="ok-msg"></p>
+              </article>
+            </div>
+          </section>
+
+          <section id="section-ctl" class="module">
+            <h3>CTL · Cierre de ciclo (NPS)</h3>
+            <p class="module-help">Registro de cierre de ciclo según metodología NPS.</p>
+            <article class="card narrow">
+              <div class="fields">
+                <label># TICKET<select id="ctl-ticket"></select></label>
+                <label>TIPO NPS<select id="ctl-tipo"><option>Detractor (0-6)</option><option>Pasivo (7-8)</option><option>Promotor (9-10)</option></select></label>
+                <label>CAUSA RAÍZ<textarea id="ctl-causa" rows="3" placeholder="¿Qué originó la mala experiencia?"></textarea></label>
+                <label>ACCION CORRECTIVA<textarea id="ctl-accion" rows="3" placeholder="¿Qué se corrigió?"></textarea></label>
+                <label>RESULTADO CON CLIENTE<textarea id="ctl-resultado" rows="3" placeholder="¿Se recuperó la relación?"></textarea></label>
+                <label>FECHA CIERRE<input id="ctl-fecha" type="date" /></label>
+                <button id="btn-guardar-ctl" class="primary">Guardar cierre CTL</button>
+                <p id="ctl-msg" class="ok-msg"></p>
+              </div>
+            </article>
+          </section>
+
+          <section id="section-dashboard" class="module">
+            <h3>Dashboard</h3>
+            <p class="module-help">Vista interactiva de tickets, escalamientos y cierres CTL.</p>
+            <div class="stats">
+              <article class="stat"><span>Tickets totales</span><strong id="kpi-total">0</strong></article>
+              <article class="stat"><span>Escalamientos pendientes</span><strong id="kpi-pend">0</strong></article>
+              <article class="stat"><span>CTL cerrados</span><strong id="kpi-ctl">0</strong></article>
+            </div>
+            <article class="card">
+              <label>Filtro por estado
+                <select id="dash-filter">
+                  <option value="all">Todos</option>
+                  <option value="Nuevo">Nuevo</option>
+                  <option value="En proceso">En proceso</option>
+                  <option value="Cerrado CTL">Cerrado CTL</option>
+                </select>
+              </label>
+              <canvas id="dash-canvas" width="820" height="220"></canvas>
+            </article>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
