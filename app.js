@@ -26,6 +26,23 @@ const message = document.querySelector("#auth-message");
 const ticket = document.querySelector("#ticket-id");
 const logoutBtn = document.querySelector("#logout-btn");
 
+
+const logoCandidates = [
+  "https://raw.githubusercontent.com/conversatools/logoconversa.png/main/logoconversa.png",
+  "https://github.com/conversatools/logoconversa.png/raw/main/logoconversa.png",
+  "https://github.com/conversatools/logoconversa.png/blob/main/logoconversa.png?raw=1",
+];
+
+document.querySelectorAll("img[data-logo]").forEach((img) => {
+  let index = 0;
+  img.addEventListener("error", () => {
+    index += 1;
+    if (index < logoCandidates.length) {
+      img.src = logoCandidates[index];
+    }
+  });
+});
+
 const randomTicket = () => Math.floor(10000000 + Math.random() * 89999999);
 const showApp = () => {
   appView.classList.remove("hidden");
