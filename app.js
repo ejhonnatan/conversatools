@@ -39,7 +39,9 @@ const state = {
 };
 
 const randomTicket = () => Math.floor(10000000 + Math.random() * 89999999);
-ticket.textContent = randomTicket();
+if (ticket) {
+  ticket.textContent = randomTicket();
+}
 
 
 const toast = document.querySelector("#save-toast");
